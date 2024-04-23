@@ -35,4 +35,19 @@ public class TodoService {
         log.info("Todo with id {} doesn't exist", id);
         return null;
     }
+
+    public Todo updateTodo (Todo todo) {
+        Optional<Todo> existingTodo = todoRepo.findById(todo.getId());
+        todo.setCreatedAt(existingTodo.get().getCreatedAt());
+        todo.setUpdatedAt(LocalDateTime.now());
+
+        Todo updatedTodo = todoRepo.save(todo);
+        log.info("Todo with id: {} updated successfully", todo.getId());
+        return updatedTodo;
+    }
+
+    public void deleteTodoById(Integer id) {
+        todoRepo.deleteById(id);
+        log.info("Todo with id: {} deleted successfully", id);
+    }
 }
