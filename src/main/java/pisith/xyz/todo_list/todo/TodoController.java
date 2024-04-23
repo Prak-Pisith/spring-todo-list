@@ -22,4 +22,9 @@ public class TodoController {
     public ResponseEntity<Todo> saveTodo (@RequestBody Todo todo) {
         return ResponseEntity.ok().body(todoService.saveTodo(todo));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Todo> getTodoById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(todoService.getTodoById(id));
+    }
 }
